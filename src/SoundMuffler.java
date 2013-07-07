@@ -3,8 +3,6 @@ package net.minecraft.src;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import net.minecraft.client.Minecraft;
-
 /**
  * Keep track of future sound events that we want to ignore from the server.
  * This isn't an exact science: there is no way to take a server sound event

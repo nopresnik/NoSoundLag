@@ -3,8 +3,6 @@ package net.minecraft.src;
 import java.util.Arrays;
 import java.util.HashSet;
 
-import net.minecraft.client.Minecraft;
-
 /**
  * Handle block placement packets: play the sound immediately and remember to ignore
  * the subsequent sound packet the server will send us later on.
@@ -85,7 +83,7 @@ public abstract class Packet15PlaceHook {
                     Block.chest.blockID,
                     Block.commandBlock.blockID,
                     Block.dispenser.blockID,
-                    Block.doorSteel.blockID,
+                    Block.doorIron.blockID,
                     Block.doorWood.blockID,
                     Block.dragonEgg.blockID,
                     Block.enchantmentTable.blockID,
@@ -97,8 +95,8 @@ public abstract class Packet15PlaceHook {
                     Block.redstoneRepeaterActive.blockID,
                     Block.redstoneRepeaterIdle.blockID,
                     Block.stoneButton.blockID,
-                    Block.stoneOvenActive.blockID,
-                    Block.stoneOvenIdle.blockID,
+                    Block.furnaceBurning.blockID,
+                    Block.furnaceIdle.blockID,
                     Block.trapdoor.blockID,
                     Block.woodenButton.blockID,
                     Block.workbench.blockID // a.k.a. crafting table

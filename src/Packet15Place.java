@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 
 public class Packet15Place extends Packet
@@ -31,43 +31,43 @@ public class Packet15Place extends Packet
         this.yPosition = par2;
         this.zPosition = par3;
         this.direction = par4;
-        this.itemStack = par5ItemStack;
+        this.itemStack = par5ItemStack != null ? par5ItemStack.copy() : null;
         this.xOffset = par6;
         this.yOffset = par7;
         this.zOffset = par8;
-        // begin modified code
+        // NoSoundLag start
         Packet15PlaceHook.onBlockPlace(xPosition, yPosition, zPosition, direction, itemStack);
-        // end modified code
+        // NoSoundLag end
     }
 
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
+    public void readPacketData(DataInput par1DataInput) throws IOException
     {
-        this.xPosition = par1DataInputStream.readInt();
-        this.yPosition = par1DataInputStream.read();
-        this.zPosition = par1DataInputStream.readInt();
-        this.direction = par1DataInputStream.read();
-        this.itemStack = readItemStack(par1DataInputStream);
-        this.xOffset = (float)par1DataInputStream.read() / 16.0F;
-        this.yOffset = (float)par1DataInputStream.read() / 16.0F;
-        this.zOffset = (float)par1DataInputStream.read() / 16.0F;
+        this.xPosition = par1DataInput.readInt();
+        this.yPosition = par1DataInput.readUnsignedByte();
+        this.zPosition = par1DataInput.readInt();
+        this.direction = par1DataInput.readUnsignedByte();
+        this.itemStack = readItemStack(par1DataInput);
+        this.xOffset = (float)par1DataInput.readUnsignedByte() / 16.0F;
+        this.yOffset = (float)par1DataInput.readUnsignedByte() / 16.0F;
+        this.zOffset = (float)par1DataInput.readUnsignedByte() / 16.0F;
     }
 
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
+    public void writePacketData(DataOutput par1DataOutput) throws IOException
     {
-        par1DataOutputStream.writeInt(this.xPosition);
-        par1DataOutputStream.write(this.yPosition);
-        par1DataOutputStream.writeInt(this.zPosition);
-        par1DataOutputStream.write(this.direction);
-        writeItemStack(this.itemStack, par1DataOutputStream);
-        par1DataOutputStream.write((int)(this.xOffset * 16.0F));
-        par1DataOutputStream.write((int)(this.yOffset * 16.0F));
-        par1DataOutputStream.write((int)(this.zOffset * 16.0F));
+        par1DataOutput.writeInt(this.xPosition);
+        par1DataOutput.write(this.yPosition);
+        par1DataOutput.writeInt(this.zPosition);
+        par1DataOutput.write(this.direction);
+        writeItemStack(this.itemStack, par1DataOutput);
+        par1DataOutput.write((int)(this.xOffset * 16.0F));
+        par1DataOutput.write((int)(this.yOffset * 16.0F));
+        par1DataOutput.write((int)(this.zOffset * 16.0F));
     }
 
     /**
